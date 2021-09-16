@@ -49,7 +49,7 @@ int main()
         slam::simulation::Simulation simulation;
 
         // 2. open the simulation file
-        simulation.openSimulationFile( "../data/laser.txt" );
+        simulation.openSimulationFile( "../data/laser2.txt" );
 
         // 3. read the data
         slam::sensor::LaserScan scan1;
@@ -71,6 +71,11 @@ int main()
 	// 6. icp by pcl library
 	pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
 	
+	icp.setMaxCorrespondenceDistance(0.1);
+	icp.setTransformationEpsilon(1e-10);
+	icp.setEuclideanFitnessEpsilon(0.01);
+	icp.setMaximumIterations (100);
+
 	icp.setInputSource( pointCloud1 );
     	icp.setInputTarget( pointCloud2 );
 
@@ -92,7 +97,9 @@ int main()
 
 		float x, y, z, roll, pitch, yaw;
 		pcl::getTranslationAndEulerAngles( transform, x, y, z, roll, pitch, yaw );
-		std::cout<<"transform: ( "<<x<<", "<<y<<", "<<yaw * 180 / M_PI<<" )"<<std::endl;
+		//std::cout<<"transform: ( "<<x<<", "<<y<<", "<<yaw * 180 / M_PI<<" )"<<std::endl;
+	
+		std::cout<<"transform: ( "<<x<<", "<<y<<", "<<yaw<<" )"<<std::endl;
 	}
 
 	return 0;

@@ -31,7 +31,7 @@ int main()
 	slam::simulation::Simulation simulation;
 	
 	// 2. open the simulation file
-	simulation.openSimulationFile( "../data/laser.txt" );
+	simulation.openSimulationFile( "../data/laser2.txt" );
 	
 	// 3. read the data
 	slam::sensor::LaserScan scan1;
